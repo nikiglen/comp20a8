@@ -1,0 +1,146 @@
+<!doctype html>
+
+<html>
+
+<head>
+	<title>Set List</title>
+
+	<style type="text/css">
+		div {
+			font-size: 1.25em;
+			font-family: serif;
+		}
+		select {
+			font-size: 1em;
+			font-family: serif;
+		}
+		input {
+			font-size: 1em;
+			font-family: serif;
+		}
+		span.title {
+			font-size: 1.1em;
+			font-weight: bold;
+		}
+		table {
+			width: 100%;
+			text-align: left;
+		}
+		div.block {
+			display: inline-block;
+			width: 50%;
+		}
+		p.underline {
+			text-decoration: underline;
+		}
+	</style>
+
+</head>
+
+
+<body>
+	<div id="serialized">&nbsp;</div>
+
+	<script type="text/javascript">
+		function filter()
+		{
+			genre = document.filter_by.genres.value;
+			document.getElementById("filter_results").innerHTML = "<br /><p class='underline'>" + genre + " Songs</p>";
+			for (i = 0; i < 10; i++)
+			{
+				if (setlist[i]['genre'] == genre)
+				document.getElementById("filter_results").innerHTML += setlist[i]['title'] + "<br />";
+			}
+			return false;
+		}
+	</script>
+
+
+	<div class="block" id="display" style="float: left"></div>
+	<div class="block">
+		<p><b>Select a genre to filter by:</b></p>
+		<form name="filter_by" onsubmit="return filter()">
+			<select id="genres" name="genres">
+				<option value="Jazz">Jazz</option>
+				<option value="Jazz Fusion">Jazz Fusion</option>
+				<option value="Bop">Bop</option>
+			</select>
+			<input type="submit" value="Filter">
+		</form>
+		<p id="filter_results"></p>
+	</div>
+
+
+	<script type="text/javascript">
+		setlist = [
+			{"title":"Tarova",
+				"artist":"Snarky Puppy",
+				"genre":"Jazz Fusion",
+				"year":"2016"
+			},
+			{"title":"Chameleon",
+				"artist":"Herbie Hancock",
+				"genre":"Jazz",
+				"year":"1975"
+			},
+			{"title":"Spain", 
+				"artist":"Chick Corea", 
+				"genre":"Bop", 
+				"year":"1973"
+			},
+			{"title":"Red Sand", 
+				"artist":"Bill Laurance",
+				"genre":"Jazz",
+				"year":"2015"
+			},
+			{"title":"Moanin'", 
+				"artist":"Art Blakey and the Jazz Messengers", 
+				"genre":"Jazz", 
+				"year":"1959"
+			},
+			{"title":"Cinnamon Tree", 
+				"artist":"Esperanza Spalding",
+				"genre":"Jazz", 
+				"year":"2012"
+			},
+			{"title":"No Mystery",
+				"artist":"Return to Forever", 
+				"genre":"Jazz Fusion", 
+				"year":"1975"
+			},
+			{"title":"Madiba", 
+				"artist":"Shaun Martin", 
+				"genre":"Jazz", 
+				"year":"2015"
+			},
+			{"title":"Birdland", 
+				"artist":"Weather Report", 
+				"genre":"Jazz", 
+				"year":"1977"
+			},
+			{"title":"Quartermaster", 
+				"artist":"Snarky Puppy", 
+				"genre":"Jazz", 
+				"year":"2012"
+			}
+		]
+
+
+		document.getElementById("serialized").innerHTML = JSON.stringify(setlist);
+
+		for (i = 0; i < 10; i++)
+		{
+			song = "<p>"
+					+ "<span class='title'>" + setlist[i]['title'] + "</span>" + "<br />"
+					+ "Artist: " + setlist[i]['artist'] + "<br />"
+					+ "Genre: " + setlist[i]['genre'] + "<br />"
+					+ "Released " + setlist[i]['year'] + "<br />"
+					+ "</p>"
+			document.getElementById("display").innerHTML += song;
+		}
+
+	</script>
+
+</body>
+
+</html>
